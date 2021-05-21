@@ -1,7 +1,7 @@
-from telegram import Update
+from telegram import Update, ParseMode
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler
 from telegram.ext.filters import Filters
-from telegram import run_async
+from telegram.ext.dispatcher import run_async
 import config
 
 TOKEN = config.TOKEN
@@ -13,7 +13,7 @@ CON = config.CON
 def send_async(context, *args, **kwargs) -> None:
     context.bot.send_message(*args, **kwargs)
 
-def chart(update: Update, context: CallbackContext):
+def chart(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
         "https://dex.guru/token/{}".format(CHART)
     )
@@ -24,15 +24,15 @@ def bsc(update: Update, context: CallbackContext):
     )
 
 
-def contract(update: Update, context: CallbackContext):
+def contract(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
         "Contract Address:\n{} \n\nREMEMBER: \nUse Version 1 of PCS \n\nset 11.5% slippage".format(CON)
     )
 
 
-def error_handler(update: Update, context: CallbackContext):
+def error_handler(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
-        "Apologies, I am currently not working.\nPlease try again later.\n\nOr buy some $WAIV!!!"
+        "Apologies, I am currently not working.\nPlease try again later."
     )
 
 def text_filter(update: Update, context: CallbackContext):
